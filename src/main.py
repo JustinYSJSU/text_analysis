@@ -11,13 +11,14 @@ def main():
   print()
 
   user_choice = input("Enter here: ")
+  user_choice = user_choice.upper()
+
   user_text_file = ""
   if(user_choice == 'T'):
     user_text_file = input("Enter your text here: ")
     text_analyzer = TextAnalysis()
     print()
     text_analyzer.analyze_text(user_text_file)
-
 
   if(user_choice == 'F'):
     user_text_file = input("Enter your file path here: ")

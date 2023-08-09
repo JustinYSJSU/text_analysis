@@ -17,17 +17,8 @@ class AnalysisTools:
         analysis_choice = input()
         return analysis_choice
     
-    def word_freq_analysis(self, text):
-        pass
-
-    def sentiment_analysis(self, text):
-        pass
-
-    def keyword_analysis(self, text):
-        pass
-
-    def part_of_speech_analysis(self, text):
-        pass
+    def initiate_export(self):
+        print("Export?")
 
 
     
