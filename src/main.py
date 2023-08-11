@@ -1,4 +1,5 @@
 from text_analysis import TextAnalysis
+from file_analysis import FileAnalysis
 
 def main():
   print("************************************")
@@ -22,6 +23,9 @@ def main():
 
   if(user_choice == 'F'):
     user_text_file = input("Enter your file path here: ")
+    file_analyzer = FileAnalysis()
+    print()
+    file_analyzer.analyze_file(user_text_file)
     
 if __name__ == "__main__":
   main()
