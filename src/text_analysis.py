@@ -24,3 +24,6 @@ class TextAnalysis():
       print()
       most_freq_word = list(freq_dict.keys())[0]
       print(f"The most frequent word is: '{most_freq_word}' with a frequency of {freq_dict[most_freq_word]}")
+
+    if analysis_choice == "4":
+      text_analyzer.part_of_speech_analysis_text(user_input)

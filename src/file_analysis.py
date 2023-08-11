@@ -12,6 +12,7 @@ class FileAnalysis():
     print("Please pick an analysis option")
     analysis_choice = analyzer.analysis_options()
     file = file_analyzer.verify_file(filepath)
+
     if analysis_choice == "1":
       freq_dict = file_analyzer.word_freq_analysis_file(file)
       print()
@@ -24,3 +25,6 @@ class FileAnalysis():
       print()
       most_freq_word = list(freq_dict.keys())[0]
       print(f"The most frequent word is: '{most_freq_word}' with a frequency of {freq_dict[most_freq_word]}")
+
+    if analysis_choice == "4":
+      file_analyzer.part_of_speech_analysis_file(file)

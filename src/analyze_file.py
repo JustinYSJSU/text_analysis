@@ -1,4 +1,8 @@
 import os
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
+from collections import Counter
 
 class FileAnalysis:
     file = None
@@ -49,4 +53,72 @@ class FileAnalysis:
         pass
 
     def part_of_speech_analysis_file(self, file):
-        pass
+        """ Analyze the parts of speech of each word in the text.
+
+        Keyword Arguments:
+        file -- the inputted file
+
+        """
+        data = file.read() #read file, then split it like text 
+        #download tools needed for analysis
+        nltk.download('punkt')
+        nltk.download('averaged_perceptron_tagger')
+        #split the text, then tag each word 
+        new_text = word_tokenize(data)
+        pos_tags = pos_tag(new_text)
+        #count the occurence of each tag in the text
+        tag_counts = Counter(tag for word, tag in pos_tags)
+        tag_representations = {
+            "CC": "Conjunctional Coordinator", 
+            "CD": "Cardinal Digit", 
+            "DT": "Determiner", 
+            "EX": "Existenial", 
+            "FW": "Foreign Word", 
+            "IN": "Preposition / Conjunction", 
+            "JJ": "Adjective",
+            "JJR": "Adjective / Comparative", 
+            "JJS": "Adjective / Superlative",
+            "LS": "List Marker",
+            "MD": "Modal",
+            "NN": "Singular Noun",
+            "NNS": "Plural noun",
+            "NNP": "Singular Proper Noun",
+            "NNPS": "Propoer noun plural",
+            "POS": "Possessive Ending",
+            "PDT": "Predeterminer",
+            "WRB": "Abverb of WH (Where, when, why,etc)",
+            "WP$": "Possessive of WH (Whose)", 
+            "WP": "Pronoun of WH (who, which, what, whose, etc)",
+            "WDT": "Determiner of WP", 
+            "VBZ": "Verb",
+            "VB": "Base Verb", 
+            "VBD": "Past tense verb",
+            "VBG": "Present tense verb",
+            "VBP": "Non-3rd person singular present verb",
+            "VBN": "Past participle verb",
+            "UH": "Interjection",
+            "TO": "To go", 
+            "RP": "Particle",
+            "RBS": "Adverb",
+            "RB": "Adverb",
+            "RBR": "Adverb",
+            "PRP": "Personal Pronoun",
+            "PRP$": "Possessive Pronoun",
+            ".": "Period",
+            ":": "Colon",
+            ",": "Comma",
+            "HYPH": "Hyphen", 
+            "$": "Dollar",
+            "````": "Left Quote",
+            " '' ": "Right Quote",
+            "-LRB-": "Left Bracket",
+            "-RRB-": "Right Bracket",
+            "ADD": "Email",
+            "AFX": "Affix",
+            "XX": "Unknown",
+        }
+
+        print()
+        print("***Part of Speech Analysis Results***")
+        for tag in tag_counts:
+            print(f"{tag_representations[tag]} count: {tag_counts[tag]}")
