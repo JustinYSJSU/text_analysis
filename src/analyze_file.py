@@ -3,6 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 from collections import Counter
+import time
 
 class FileAnalysis:
     file = None
@@ -32,6 +33,8 @@ class FileAnalysis:
         word_freq = {} #hold each word + feq
 
         #for each word, add to its counter or add a new word to the freq counter
+        print("Loading analysis...")
+        print()
         for line in split_text:
             word_list = line.split()
             for word in word_list:
@@ -74,6 +77,8 @@ class FileAnalysis:
         nltk.download('punkt')
         nltk.download('averaged_perceptron_tagger')
         #split the text, then tag each word 
+        
+        print("Loading analysis...")
         new_text = word_tokenize(data)
         pos_tags = pos_tag(new_text)
         #count the occurence of each tag in the text
@@ -119,13 +124,15 @@ class FileAnalysis:
             ",": "Comma",
             "HYPH": "Hyphen", 
             "$": "Dollar",
-            "````": "Left Quote",
-            " '' ": "Right Quote",
+            "``": "Left Quote",
+            "''": "Right Quote",
             "-LRB-": "Left Bracket",
             "-RRB-": "Right Bracket",
             "ADD": "Email",
             "AFX": "Affix",
             "XX": "Unknown",
+            "(": "Left Parenthesis",
+            ")": "Right Parenthesis"
         }
 
         print()

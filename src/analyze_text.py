@@ -2,6 +2,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 from collections import Counter
+import time
 
 class TextAnalysis:
  
@@ -21,7 +22,8 @@ class TextAnalysis:
         text = text.lower()
         word_freq = {} #hold each word + feq
         split_text = text.splitlines() #split the text by any white space (each word separated by space)
-
+        print("Loading analysis...")
+        print()
         #for each word, add to its counter or add a new word to the freq counter
         for line in split_text:
             word_list = line.split()
@@ -31,7 +33,6 @@ class TextAnalysis:
                     word_freq[word] += 1
                 else:
                     word_freq[word] = 1
-
         #sort by the freq of each word, largest to smallest
         sorted_freq = sorted(word_freq.items(), key = lambda x:x[1], reverse=True)
         sorted_freq = dict(sorted_freq)
@@ -58,6 +59,7 @@ class TextAnalysis:
         nltk.download('punkt')
         nltk.download('averaged_perceptron_tagger')
         #split the text, then tag each word 
+        print("Loading analysis...")
         new_text = word_tokenize(text)
         pos_tags = pos_tag(new_text)
         #count the occurence of each tag in the text
@@ -103,8 +105,8 @@ class TextAnalysis:
             ",": "Comma",
             "HYPH": "Hyphen", 
             "$": "Dollar",
-            "````": "Left Quote",
-            " '' ": "Right Quote",
+            "``": "Left Quote",
+            "''": "Right Quote",
             "-LRB-": "Left Bracket",
             "-RRB-": "Right Bracket",
             "ADD": "Email",
