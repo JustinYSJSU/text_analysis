@@ -34,8 +34,17 @@ class TextAnalysis:
 
         #sort by the freq of each word, largest to smallest
         sorted_freq = sorted(word_freq.items(), key = lambda x:x[1], reverse=True)
+        sorted_freq = dict(sorted_freq)
+        print()
+        print("***Word Frequency Analysis Results***")
+        print()
+      
+        for word, freq in sorted_freq.items():
+          print(f"{word}: {freq}")
 
-        return dict(sorted_freq)
+        print()
+        most_freq_word = list(sorted_freq.keys())[0]
+        print(f"The most frequent word is: '{most_freq_word}' with a frequency of {sorted_freq[most_freq_word]}")
 
     def sentiment_analysis_text(self, text):
         pass
@@ -107,3 +116,4 @@ class TextAnalysis:
         print("***Part of Speech Analysis Results***")
         for tag in tag_counts:
             print(f"{tag_representations[tag]} count: {tag_counts[tag]}")
+        print(f"The most common part of speech is: {tag_representations[max(tag_counts, key=tag_counts.get)]}")
