@@ -3,6 +3,8 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 from collections import Counter
+from rake_nltk import Rake
+
 import time
 
 class FileAnalysis:
@@ -63,7 +65,15 @@ class FileAnalysis:
         pass
 
     def keyword_analysis_file(self, file):
-        pass
+        nltk.download('stopwords')
+        data = file.read()
+        tokens = word_tokenize(data)
+        r = Rake()
+        data = ' '.join(tokens)
+        r.extract_keywords_from_text(data)
+        keywords = r.get_ranked_phrases_with_scores()[:10]
+        for score, word in keywords:
+            print(f"Score: {score:.2f}, Keyword: {word}")
 
     def part_of_speech_analysis_file(self, file):
         """ Analyze the parts of speech of each word in the text.

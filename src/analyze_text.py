@@ -3,6 +3,7 @@ from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 from collections import Counter
 import time
+from rake_nltk import Rake
 
 class TextAnalysis:
  
@@ -51,7 +52,15 @@ class TextAnalysis:
         pass
 
     def keyword_analysis_text(self, text):
-        pass
+        nltk.download('stopwords')
+        tokens = word_tokenize(text)
+        r = Rake()
+        data = ' '.join(tokens)
+        r.extract_keywords_from_text(data)
+        keywords = r.get_ranked_phrases_with_scores()[:10]
+        for score, word in keywords:
+            print(f"Score: {score:.2f}, Keyword: {word}")
+
 
     def part_of_speech_analysis_text(self, text):
          

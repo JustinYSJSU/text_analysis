@@ -16,5 +16,8 @@ class FileAnalysis():
     if analysis_choice == "1":
       file_analyzer.word_freq_analysis_file(file)
   
+    if analysis_choice == "3":
+       file_analyzer.keyword_analysis_file(file)
+       
     if analysis_choice == "4":
       file_analyzer.part_of_speech_analysis_file(file)
