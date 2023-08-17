@@ -7,6 +7,7 @@ def main():
   print("************************************")
 
   print()
+  print("***PLEASE NOTE: Unless you are translating, your input text / file MUST be in ENGLISH.***")
   print("Press 'T' to input your own text via keyboard")
   print("Press 'F' to input a path to a file")
   print()

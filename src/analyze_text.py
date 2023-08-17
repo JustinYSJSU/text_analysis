@@ -4,6 +4,8 @@ from nltk import pos_tag
 from collections import Counter
 import time
 from rake_nltk import Rake
+from googletrans import Translator, constants
+from pprint import pprint
 
 class TextAnalysis:
  
@@ -48,8 +50,15 @@ class TextAnalysis:
         most_freq_word = list(sorted_freq.keys())[0]
         print(f"The most frequent word is: '{most_freq_word}' with a frequency of {sorted_freq[most_freq_word]}")
 
-    def sentiment_analysis_text(self, text):
-        pass
+    def translate_text(self, text):
+        translator = Translator()
+        print()
+        print("***SUPPORTED LANGUAGES***")
+        pprint(constants.LANGUAGES)
+        destination_lang = input("Please enter the language code you want to translate to: ")
+        translation = translator.translate(text, dest=destination_lang)
+        print()
+        print(f"{translation.text} ({translation.dest})")
 
     def keyword_analysis_text(self, text):
         nltk.download('stopwords')

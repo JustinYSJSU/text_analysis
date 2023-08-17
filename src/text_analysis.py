@@ -15,6 +15,9 @@ class TextAnalysis():
     if analysis_choice == "1":
         text_analyzer.word_freq_analysis_text(user_input)
 
+    if analysis_choice == "2":
+        text_analyzer.translate_text(user_input)
+
     if analysis_choice == "3": 
        text_analyzer.keyword_analysis_text(user_input)
            

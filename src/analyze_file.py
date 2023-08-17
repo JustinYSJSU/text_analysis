@@ -4,8 +4,9 @@ from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 from collections import Counter
 from rake_nltk import Rake
-
 import time
+from googletrans import Translator, constants
+from pprint import pprint
 
 class FileAnalysis:
     file = None
@@ -15,7 +16,7 @@ class FileAnalysis:
         
     def verify_file(self, filepath):
         try:
-            file = open(filepath, "r") #file exists
+            file = open(filepath, "r", encoding="utf-8") #file exists
         except OSError as e:
             print("File not found") #does not exist 
         return file
@@ -61,8 +62,24 @@ class FileAnalysis:
         print(f"The most frequent word is: '{most_freq_word}' with a frequency of {sorted_freq[most_freq_word]}")
 
 
-    def sentiment_analysis_file(self, file):
-        pass
+    def translate_file(self, file):
+        data = file.read() #read file, then split it like text 
+        split_text = data.splitlines()
+        translator = Translator()
+        print()
+        print("***SUPPORTED LANGUAGES***")
+        pprint(constants.LANGUAGES)
+        destination_lang = input("Please enter the language code you want to translate to: ")
+        translated_file = open("translation.txt", "w", encoding='utf-8')
+
+        print()
+        print("Translating. Please wait...")
+        for line in split_text:
+            translation = translator.translate(line, dest=destination_lang)
+            translation_encoded = translation.text
+            translated_file.write(translation_encoded + '\n')
+        translated_file.close()
+        print("Translation complete!")
 
     def keyword_analysis_file(self, file):
         nltk.download('stopwords')
