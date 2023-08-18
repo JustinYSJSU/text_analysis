@@ -30,6 +30,7 @@ class FileAnalysis:
         Return Values:
         A dictionary containing each word and its frequency 
         """
+        results = " "
         data = file.read() #read file, then split it like text 
         split_text = data.splitlines()
 
@@ -50,17 +51,24 @@ class FileAnalysis:
         #sort by the freq of each word, largest to smallest
         sorted_freq = sorted(word_freq.items(), key = lambda x:x[1], reverse=True)
         sorted_freq = dict(sorted_freq)
+
         print()
         print("***Word Frequency Analysis Results***")
         print()
-      
+
         for word, freq in sorted_freq.items():
           print(f"{word}: {freq}")
+          results += f"{word}: {freq}"
+          results += "\n"
+
+        results += "\n"
 
         print()
         most_freq_word = list(sorted_freq.keys())[0]
+ 
         print(f"The most frequent word is: '{most_freq_word}' with a frequency of {sorted_freq[most_freq_word]}")
-
+        results += f"The most frequent word is: '{most_freq_word}' with a frequency of {sorted_freq[most_freq_word]}"
+        return results
 
     def translate_file(self, file):
         data = file.read() #read file, then split it like text 
@@ -70,7 +78,8 @@ class FileAnalysis:
         print("***SUPPORTED LANGUAGES***")
         pprint(constants.LANGUAGES)
         destination_lang = input("Please enter the language code you want to translate to: ")
-        translated_file = open("translation.txt", "w", encoding='utf-8')
+        file_name = input("Please enter the name of the .txt to export to (no .txt needed): ")
+        translated_file = open(f"{file_name}.txt", "w", encoding='utf-8')
 
         print()
         print("Translating. Please wait...")
@@ -80,8 +89,10 @@ class FileAnalysis:
             translated_file.write(translation_encoded + '\n')
         translated_file.close()
         print("Translation complete!")
+        return translated_file
 
     def keyword_analysis_file(self, file):
+        results = ""
         nltk.download('stopwords')
         data = file.read()
         tokens = word_tokenize(data)
@@ -91,6 +102,9 @@ class FileAnalysis:
         keywords = r.get_ranked_phrases_with_scores()[:10]
         for score, word in keywords:
             print(f"Score: {score:.2f}, Keyword: {word}")
+            results += f"Score: {score:.2f}, Keyword: {word}"
+            results += "\n"
+        return results
 
     def part_of_speech_analysis_file(self, file):
         """ Analyze the parts of speech of each word in the text.
@@ -99,6 +113,7 @@ class FileAnalysis:
         file -- the inputted file
 
         """
+        results = ""
         data = file.read() #read file, then split it like text 
         #download tools needed for analysis
         nltk.download('punkt')
@@ -166,4 +181,7 @@ class FileAnalysis:
         print("***Part of Speech Analysis Results***")
         for tag in tag_counts:
             print(f"{tag_representations[tag]} count: {tag_counts[tag]}")
-        print(f"The most common part of speech is: {tag_representations[max(tag_counts, key=tag_counts.get)]}")
+            results += f"{tag_representations[tag]} count: {tag_counts[tag]}"
+            results += "\n"
+        results += f"The most common part of speech is: {tag_representations[max(tag_counts, key=tag_counts.get)]}"
+        return results

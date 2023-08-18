@@ -11,7 +11,7 @@ class TextAnalysis():
   def analyze_text(self, user_input):
     print("Please pick an analysis option")
     analysis_choice = analyzer.analysis_options()
-
+    export = analyzer.initiate_export()
     if analysis_choice == "1":
         text_analyzer.word_freq_analysis_text(user_input)
 

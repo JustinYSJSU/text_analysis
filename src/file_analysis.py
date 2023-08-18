@@ -9,18 +9,27 @@ class FileAnalysis():
     pass
   
   def analyze_file(self, filepath):
+    results = ""
     print("Please pick an analysis option")
     analysis_choice = analyzer.analysis_options()
     file = file_analyzer.verify_file(filepath)
 
     if analysis_choice == "1":
-      file_analyzer.word_freq_analysis_file(file)
+      results = file_analyzer.word_freq_analysis_file(file)
   
-    if analysis_choice == "2":
+    elif analysis_choice == "2":
       file_analyzer.translate_file(file)
       
-    if analysis_choice == "3":
-       file_analyzer.keyword_analysis_file(file)
+    elif analysis_choice == "3":
+      results = file_analyzer.keyword_analysis_file(file)
        
-    if analysis_choice == "4":
-      file_analyzer.part_of_speech_analysis_file(file)
+    elif analysis_choice == "4":
+      results = file_analyzer.part_of_speech_analysis_file(file)
+
+    if analysis_choice != 2:
+        export = analyzer.initiate_export()
+
+        if export:
+            analyzer.export(results)
+      
+    
