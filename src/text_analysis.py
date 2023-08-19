@@ -9,17 +9,22 @@ class TextAnalysis():
     pass
   
   def analyze_text(self, user_input):
+    results = ""
     print("Please pick an analysis option")
     analysis_choice = analyzer.analysis_options()
-    export = analyzer.initiate_export()
     if analysis_choice == "1":
-        text_analyzer.word_freq_analysis_text(user_input)
+        results = text_analyzer.word_freq_analysis_text(user_input)
 
     if analysis_choice == "2":
-        text_analyzer.translate_text(user_input)
+        results = text_analyzer.translate_text(user_input)
 
     if analysis_choice == "3": 
-       text_analyzer.keyword_analysis_text(user_input)
+       results = text_analyzer.keyword_analysis_text(user_input)
            
     if analysis_choice == "4":
-        text_analyzer.part_of_speech_analysis_text(user_input)
+        results = text_analyzer.part_of_speech_analysis_text(user_input)
+
+    export = analyzer.initiate_export()
+
+    if export:
+       analyzer.export(results)

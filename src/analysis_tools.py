@@ -19,7 +19,7 @@ class AnalysisTools:
         return analysis_choice
     
     def initiate_export(self):
-        print("Would you like to export your results to a .txt file? If you translated, prees 'N'.  Y / N")
+        print("Would you like to export your results to a .txt file? If you translated a FILE, prees 'N'.  Y / N")
         user_choice = input()
         user_choice = user_choice.upper()
         

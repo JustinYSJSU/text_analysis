@@ -22,6 +22,7 @@ class TextAnalysis:
         Return Values:
         A dictionary containing each word and its frequency 
         """
+        results = ""
         text = text.lower()
         word_freq = {} #hold each word + feq
         split_text = text.splitlines() #split the text by any white space (each word separated by space)
@@ -45,12 +46,18 @@ class TextAnalysis:
       
         for word, freq in sorted_freq.items():
           print(f"{word}: {freq}")
+          results += f"{word}: {freq}"
+          results += "\n"
+        results += "\n"
 
         print()
         most_freq_word = list(sorted_freq.keys())[0]
         print(f"The most frequent word is: '{most_freq_word}' with a frequency of {sorted_freq[most_freq_word]}")
+        results += f"The most frequent word is: '{most_freq_word}' with a frequency of {sorted_freq[most_freq_word]}"
+        return results
 
     def translate_text(self, text):
+        results = ""
         translator = Translator()
         print()
         print("***SUPPORTED LANGUAGES***")
@@ -58,9 +65,12 @@ class TextAnalysis:
         destination_lang = input("Please enter the language code you want to translate to: ")
         translation = translator.translate(text, dest=destination_lang)
         print()
-        print(f"{translation.text} ({translation.dest})")
+        print(f"{text} ({translation.src}) -> {translation.text} ({translation.dest})")
+        results += f"{text} ({translation.src}) {translation.text} ({translation.dest})"
+        return results
 
     def keyword_analysis_text(self, text):
+        results = ""
         nltk.download('stopwords')
         tokens = word_tokenize(text)
         r = Rake()
@@ -69,10 +79,12 @@ class TextAnalysis:
         keywords = r.get_ranked_phrases_with_scores()[:10]
         for score, word in keywords:
             print(f"Score: {score:.2f}, Keyword: {word}")
+            results += f"Score: {score:.2f}, Keyword: {word}"
+            results += "\n"
 
 
     def part_of_speech_analysis_text(self, text):
-         
+        results = ""
         #download tools needed for analysis
         nltk.download('punkt')
         nltk.download('averaged_perceptron_tagger')
@@ -134,6 +146,12 @@ class TextAnalysis:
 
         print()
         print("***Part of Speech Analysis Results***")
+        results += "***Part of Speech Analysis Results***"
+        results += "\n"
         for tag in tag_counts:
             print(f"{tag_representations[tag]} count: {tag_counts[tag]}")
+            results += f"{tag_representations[tag]} count: {tag_counts[tag]}"
+            results += "\n"
         print(f"The most common part of speech is: {tag_representations[max(tag_counts, key=tag_counts.get)]}")
+        results += f"The most common part of speech is: {tag_representations[max(tag_counts, key=tag_counts.get)]}"
+        return results 
