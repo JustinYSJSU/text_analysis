@@ -7,6 +7,7 @@
   - Translation: Translate given file or text to a selected langauges (100+ available). 
   - Keyword Analysis: Find the most relevant words or phrases in the text. 
   - Part of Speech Analysis: Find the most common parts of speech in the text. 
+  - Exportation: Export your analysis results to a .txt file. 
 
 ## Technologies 
 - Python
